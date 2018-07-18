@@ -31,10 +31,10 @@ app.set('views','./views');
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use('/store', function(req, res, next){
-//   console.log('jestes w middleware');
-//   next();
-// });
+app.use('/store', function(req, res, next){
+  console.log('jestes w middleware');
+  next();
+});
 
 // app routes
 app.get('/', function(req, res) {
@@ -46,8 +46,8 @@ app.get('/logged', function(req, res) {
 });
 
 app.get('/auth/google', passport.authenticate('google', {
-  scope : ['profile', 'email']
-  })
+  scope : ['profile', 'email']}
+  )
 );
 
 app.get('/auth/google/callback', passport.authenticate('google', {
@@ -57,6 +57,6 @@ app.get('/auth/google/callback', passport.authenticate('google', {
 );
 
 app.listen(3000);
-// app.use(function(req, res, next){
-//   res.status(400).send('error 404.Check your adress');
-// });
+app.use(function(req, res, next){
+  res.status(400).send('error 404.Check your adress');
+});
